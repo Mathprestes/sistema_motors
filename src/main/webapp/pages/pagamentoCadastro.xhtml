@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{dividaBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmCadFor">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Cadastrar Pagamento" />
+				</f:facet>
+			</p:toolbar>
+			<h:panelGrid columns="2" id="pnCadFor">
+
+				<p:outputLabel value="Valor da Dívida: " />
+				<p:inputText maxlength="50" size="30"
+					value="#{dividaBean.divida.valTotal}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2">
+					</f:convertNumber>
+				</p:inputText>
+				
+				<p:outputLabel value="Valor da Parcela:" />
+				<p:inputText maxlength="20" size="30"
+					value="#{dividaBean.divida.valParcela}" >
+					<f:convertNumber locale="pt_BR" minFractionDigits="2">
+					</f:convertNumber>
+				</p:inputText>
+
+				<p:outputLabel value="Quant. Parcelas Quitadas: " />
+				<p:inputText maxlength="50" size="30"
+					value="#{dividaBean.divida.qtParcelas}" />
+
+				<p:outputLabel value="Situação: " />
+				<p:selectOneMenu value="#{dividaBean.divida.situacao}"
+					style="width:280px">
+					<f:selectItem itemLabel="Pago em dia" itemValue="Em dia " />
+					<f:selectItem itemLabel="Pago antecipado" itemValue="Antecipado " />
+					<f:selectItem itemLabel="Pago em atraso" itemValue="Em atraso " />
+					<f:selectItem itemLabel="Quitado" itemValue="Quitado " />
+					<f:facet name="footer">
+						<p:separator />
+					</f:facet>
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="3">
+				<p:commandButton value="Editar" 
+					actionListener="#{dividaBean.editar()}"
+					update=":msgGlobal :frmCadFor:pnCadFor" />
+				<p:button value="Voltar" outcome="/pages/pagamentoPesquisa.xhtml" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{motoBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmCadFor">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Moto" />
+				</f:facet>
+			</p:toolbar>
+			<h:panelGrid columns="2" id="pnCadFor">
+				<p:outputLabel value="Chassi: " />
+				<p:inputText maxlength="50" size="30"
+					value="#{motoBean.moto.chassi}" />
+
+				<p:outputLabel value="Cor:" />
+				<p:inputMask maxlength="20" size="30" value="#{motoBean.moto.cor}" />
+
+				<p:outputLabel value="Marca: " />
+				<p:inputMask maxlength="20" size="30" value="#{motoBean.moto.marca}" />
+
+				<p:outputLabel value="Modelo: " />
+				<p:inputMask maxlength="20" size="30"
+					value="#{motoBean.moto.modelo}" />
+
+				<p:outputLabel value="Placa: " />
+				<p:inputMask size="30" value="#{motoBean.moto.placa}"
+					mask="aaa-9999" />
+
+				<p:outputLabel value="Valor: " />
+				<p:inputMask maxlength="20" size="30" value="#{motoBean.moto.valor}"
+					required="true" requiredMessage="Campo Obrigatório"
+					converterMessage="Informe um valor válido"
+					validatorMessage="Informe um valor acima de R$0,00">
+					<f:validateDoubleRange minimum="0.01" maximum="9999999.99" />
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</p:inputMask>
+
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" />
+				<p:commandButton value="Salvar"
+					actionListener="#{motoBean.salvar()}"
+					update=":msgGlobal :frmCadFor:pnCadFor"
+					rendered="#{motoBean.acao == 'Novo'}" />
+				<p:commandButton value="Editar"
+					actionListener="#{motoBean.editar()}"
+					update=":msgGlobal :frmCadFor:pnCadFor"
+					rendered="#{motoBean.acao == 'Editar'}" />
+				<p:commandButton value="Excluir"
+					actionListener="#{motoBean.excluir()}"
+					update=":msgGlobal :frmCadFor:pnCadFor"
+					rendered="#{motoBean.acao == 'Excluir'}" />
+
+				<p:button value="Voltar" outcome="/pages/motoPesquisa.xhtml" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

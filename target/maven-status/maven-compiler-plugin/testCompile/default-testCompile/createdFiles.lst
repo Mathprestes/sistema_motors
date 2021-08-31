@@ -1,0 +1,4 @@
+br\com\megamotos\dao\MotoDaoTest.class
+br\com\megamotos\dao\ClienteDaoTest.class
+br\com\megamotos\dao\DividaDaoTest.class
+br\com\megamotos\dao\VendedorDaoTest.class

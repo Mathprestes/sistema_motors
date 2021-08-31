@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{vendedorBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmCadFor">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Vendedor" />
+				</f:facet>
+			</p:toolbar>
+			<h:panelGrid columns="2" id="pnCadFor">
+				<p:outputLabel value="Nome: " />
+				<p:inputText maxlength="50" size="30"
+					value="#{vendedorBean.vendedor.nome}" />
+
+				<p:outputLabel value="CPF:" />
+				<p:inputMask mask="999.999.999-99" maxlength="20" size="30"
+					value="#{vendedorBean.vendedor.cpf}" />
+
+				<p:outputLabel value="Telefone: " />
+				<p:inputMask mask="(99)99999.9999" maxlength="20" size="30"
+					value="#{vendedorBean.vendedor.telefone}" />
+
+				<p:outputLabel value="Senha: " />
+				<p:password maxlength="8" size="30"
+					value="#{vendedorBean.vendedor.senha}" />
+
+			</h:panelGrid>
+			
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" />
+				<p:commandButton value="Salvar"	actionListener="#{vendedorBean.salvar()}" update=":msgGlobal :frmCadFor:pnCadFor" rendered="#{vendedorBean.acao == 'Novo'}" />
+				<p:commandButton value="Editar"	actionListener="#{vendedorBean.editar()}" update=":msgGlobal :frmCadFor:pnCadFor" rendered="#{vendedorBean.acao == 'Editar'}" />
+				<p:commandButton value="Excluir" actionListener="#{vendedorBean.excluir()}" update=":msgGlobal :frmCadFor:pnCadFor"	rendered="#{vendedorBean.acao == 'Excluir'}" />
+				<p:button value="Voltar" outcome="/pages/vendedorPesquisa.xhtml" />
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

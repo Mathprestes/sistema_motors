@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form>
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Pagamento" />
+				</f:facet>
+			</p:toolbar>
+
+
+
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				paginator="true" rows="10" value="#{dividaBean.dividas}"
+				var="cursorfor">
+
+				<p:column headerText="Código" sortBy="#{cursorfor.codigo}">
+					<h:outputText value="#{cursorfor.codigo}" />
+				</p:column>
+				<p:column headerText="Data Inicial">
+					<h:outputText value="#{cursorfor.dtInicial}" />
+				</p:column>
+
+				<p:column headerText="Data Final">
+					<h:outputText value="#{cursorfor.dtFinal}" />
+				</p:column>
+
+				<p:column headerText="Quantidade Parcelas">
+					<h:outputText value="#{cursorfor.qtParcelas}">
+						<f:convertNumber minFractionDigits="0">
+						</f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Valor Parcela">
+					<h:outputText value="#{cursorfor.valParcela}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2">
+						</f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Valor Total">
+					<h:outputText value="#{cursorfor.valTotal}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2">
+						</f:convertNumber>
+					</h:outputText>
+				</p:column>
+
+
+				<p:column headerText="Situação">
+					<h:outputText value="#{cursorfor.situacao}" />
+				</p:column>
+
+				<!-- @javax.persistence.Transient
+	private String getSituacaoFormatado() {
+		String situacaoFormatado = null;
+		
+		if (situacao) {
+			situacaoFormatado = "Em Dia";
+		} else {
+			situacaoFormatado = "Atrasado";
+		}
+		return situacaoFormatado;
+		 
+	} -->
+
+
+
+				<p:column headerText="Placa Moto"
+					filterBy="#{cursorfor.moto.placa}">
+					<h:outputText value="#{cursorfor.moto.placa}" />
+				</p:column>
+
+				<p:column headerText="Cliente" filterBy="#{cursorfor.cliente.nome}">
+					<h:outputText value="#{cursorfor.cliente.nome}" />
+				</p:column>
+
+
+				<p:column headerText="Opções">
+					<div align="center">
+						<p:button icon="ui-icon-calculator"
+							outcome="/pages/pagamentoCadastro.xhtml">
+							<f:param name="forCod" value="#{cursorfor.codigo}" />
+							<f:param name="foracao" value="Excluir" />
+						</p:button>
+					</div>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

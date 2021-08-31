@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"> <h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Sistema MegaMotos</title>
+</h:head> <h:body>
+
+	<p:growl id="msgGlobal" />
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" header="Sistema Venda MegaMotos"
+			resizable="false" closable="false" collapsible="false"></p:layoutUnit>
+
+		<p:layoutUnit position="south" header="Desenvolvido por Prestes"
+			resizable="false" closable="false" collapsible="false"></p:layoutUnit>
+
+
+		<h:form>
+			<p:menubar>
+
+				<p:submenu label="Arquivo">
+					<p:menuitem value="Principal" outcome="/pages/principal.xhtml" />
+
+					<p:menuitem value="Sair" outcome="/pages/Login.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Motos" outcome="/pages/motoPesquisa.xhtml" />
+					<p:menuitem value="Cliente" outcome="/pages/clientePesquisa.xhtml" />
+					<p:menuitem value="Vendedor"
+						outcome="/pages/vendedorPesquisa.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="Controle">
+					<p:menuitem value="Venda" outcome="/pages/dividaCadastro.xhtml" />
+					<p:menuitem value="Pagamento"
+						outcome="/pages/pagamentoPesquisa.xhtml" />
+				</p:submenu>
+
+				<p:menuitem value="Ajuda" outcome="/pages/ajuda.xhtml" />
+
+
+
+
+			</p:menubar>
+		</h:form>
+
+
+		<p:layoutUnit position="center" resizable="false" closable="false"
+			collapsible="false">
+
+			<ui:insert name="conteudo" />
+
+
+		</p:layoutUnit>
+
+	</p:layout>
+</h:body> </html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template.xhtml">
+
+	<!-- <h:head>
+		<h:outputScript library="js" name="script.js" />
+	</h:head> -->
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{clienteBean.carregarCadastro()}"
+				type="preRenderView"></f:event>
+
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmCadFor">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Cadastro de Clientes" />
+				</f:facet>
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="pnCadFor">
+
+				<p:outputLabel value="Nome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{clienteBean.cliente.nome}" required="true"
+					requiredmMessage="Campo Obrigatório" />
+
+				<p:outputLabel value="CPF:" />
+				<p:inputMask mask="999.999.999-99" maxlength="20" size="30"
+					value="#{clienteBean.cliente.cpf}" required="true"
+					requiredmMessage="Campo Obrigatório" />
+
+				<p:outputLabel value="RG: " />
+				<p:inputMask mask="99.999.999" maxlength="20" size="30"
+					value="#{clienteBean.cliente.rg}" required="true"
+					requiredmMessage="Campo Obrigatório" />
+
+				<p:outputLabel value="Endereço:" />
+				<p:inputMask maxlength="100" size="50"
+					value="#{clienteBean.cliente.endereco}" required="true"
+					requiredmMessage="Campo Obrigatório" />
+
+				<p:outputLabel value="Telefone:" />
+				<p:inputMask mask="(99)99999-9999" maxlength="20" size="30"
+					value="#{clienteBean.cliente.telefone}" required="true"
+					requiredmMessage="Campo Obrigatório" />
+
+				<p:outputLabel value="Data Nascimento:" />
+				<p:calendar mask="99/99/9999" maxlength="10" size="20"
+						value="#{clienteBean.cliente.nascimento}" required="true"
+						requiredmMessage="Campo Obrigatório" >
+				</p:calendar>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="5">
+
+				<p:commandButton value="Salvar"
+					actionListener="#{clienteBean.salvar()}"
+					update=":msgGlobal :frmCadFor:pnCadFor"
+					rendered="#{clienteBean.acao == 'Novo'}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{clienteBean.editar()}"
+					update=":msgGlobal :frmCadFor:pnCadFor"
+					rendered="#{clienteBean.acao == 'Editar'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{clienteBean.excluir()}"
+					update=":msgGlobal :frmCadFor:pnCadFor"
+					rendered="#{clienteBean.acao == 'Excluir'}" />
+				<p:button value="Voltar" outcome="/pages/clientePesquisa.xhtml" />
+
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
